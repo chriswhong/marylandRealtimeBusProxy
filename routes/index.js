@@ -36,6 +36,9 @@ fs.readFile(__dirname + '/../data/routes.txt', {
   });
 });
 
+router.get('/', function(req, res, next) {
+  res.send('Proxy API for MTA Maryland realtime bus locations.<br/> Use the <a href="/vehicles">/vehicles</a> endpoint to get a geoJSON feed of all available live vehicles locations<br/><a href="https://github.com/chriswhong/marylandRealtimeBusProxy">Code on github</a>')
+});
 
 //vehicles geojson endpoint
 router.get('/vehicles', function(req, res, next) {
@@ -81,7 +84,7 @@ function cleanData(rawData) {
     if (line.EstimatedPoints) {
       var e = line.EstimatedPoints[0];
       lineInfo = getLineInfo(line.EstimatedPoints[0].LineDirId);
-      
+
       var vehicle = {
         type: "Feature",
         properties: {
